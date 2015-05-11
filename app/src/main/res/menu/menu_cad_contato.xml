@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="br.com.sistemasecia.contato.CadContatoActivity">
+
+    <item android:id="@+id/action_cadastro_salvar"
+        android:title="Salvar"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom|withText" />
+
+    <item android:id="@+id/action_cadastro_excluir"
+        android:title="Excluir"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom|withText" />
+
+</menu>
