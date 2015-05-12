@@ -83,7 +83,7 @@ public class CadContatoActivity extends ActionBarActivity {
 
         if(telefone == null || telefone.equals("")){
             valida = false;
-            etTelefone.setError(getString(R.string.erro));
+            etTelefone.setError("Campo Telefone é obrigatório!");
         }
 
         if(valida){
