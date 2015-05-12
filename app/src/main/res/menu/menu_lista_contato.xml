@@ -3,6 +3,7 @@
 
     <item android:id="@+id/action_lista_cadastrar"
         android:title="+"
+        android:icon="@drawable/ic_action_new"
         android:orderInCategory="100"
         app:showAsAction="ifRoom|withText" />
 

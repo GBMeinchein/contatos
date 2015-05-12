@@ -2,8 +2,8 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">#FFD700</item>
-        <item name="textColor">#000</item>
+        <item name="colorPrimary">#DAA520</item>
+        <item name="android:textColor">#000</item>
     </style>
 
 </resources>

@@ -5,11 +5,13 @@
 
     <item android:id="@+id/action_cadastro_salvar"
         android:title="Salvar"
+        android:icon="@drawable/ic_action_save"
         android:orderInCategory="100"
         app:showAsAction="ifRoom|withText" />
 
     <item android:id="@+id/action_cadastro_excluir"
         android:title="Excluir"
+        android:icon="@drawable/ic_action_discard"
         android:orderInCategory="100"
         app:showAsAction="ifRoom|withText" />
 

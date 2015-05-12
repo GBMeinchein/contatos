@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo1"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -18,18 +18,21 @@
         <activity
             android:name=".ListaContatoActivity"
             android:label="@string/title_activity_lista_contato" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".CadContatoActivity"
             android:label="@string/title_activity_cad_contato" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ListaContatoActivity"/>
+                android:value=".ListaContatoActivity" />
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login_activiy" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
