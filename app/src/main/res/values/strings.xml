@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Contato</string>
+    <string name="app_name">Contatos</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -8,5 +8,5 @@
     <string name="title_activity_cad_contato">Cadastrar</string>
     <string name="erro">Erro!</string>
     <string name="cor">#FF2070B0</string>
-    <string name="title_activity_login_activiy">LoginActiviy</string>
+    <string name="title_activity_login_activiy">Login</string>
 </resources>

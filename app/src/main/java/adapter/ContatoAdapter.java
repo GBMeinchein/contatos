@@ -50,11 +50,11 @@ public class ContatoAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.activity_contatos, null);
         }
 
-        TextView tvContatoNome = (TextView) view.findViewById(R.id.tvUsuarioNome);
-        tvContatoNome.setText(contato.getNome());
+        TextView tvContatoNome = (TextView) view.findViewById(R.id.tvContatoNome);
+        tvContatoNome.setText(contato.getRazao() + " / " + contato.getNome());
 
-        TextView tvContatoTelefone = (TextView) view.findViewById(R.id.tvUsuarioTelefone);
-        tvContatoTelefone.setText(contato.getTelefone());
+        //TextView tvContatoTelefone = (TextView) view.findViewById(R.id.tvUsuarioTelefone);
+        //tvContatoTelefone.setText(contato.getTelefone());
 
         return view;
     }

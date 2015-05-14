@@ -41,7 +41,6 @@ public class ListaContatoActivity extends ActionBarActivity implements AdapterVi
         listView.setOnItemClickListener(this);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -60,7 +59,6 @@ public class ListaContatoActivity extends ActionBarActivity implements AdapterVi
         if (id == R.id.action_lista_cadastrar) {
             startActivity(new Intent(this, CadContatoActivity.class));
         }
-
         return super.onOptionsItemSelected(item);
     }
 

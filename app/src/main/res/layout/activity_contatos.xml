@@ -11,22 +11,22 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
-        android:id="@+id/tvUsuarioNome"
+        android:id="@+id/tvContatoNome"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <TextView
+<!--    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
-        android:id="@+id/tvUsuarioTelefone"
+        android:id="@+id/tvContatoTelefone"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/tvUsuarioNome"
-        android:layout_alignRight="@+id/tvUsuarioNome"
-        android:layout_alignEnd="@+id/tvUsuarioNome" />
+        android:layout_below="@+id/tvContatoNome"
+        android:layout_alignRight="@+id/tvContatoNome"
+        android:layout_alignEnd="@+id/tvContatoNome" /> -->
 </RelativeLayout>

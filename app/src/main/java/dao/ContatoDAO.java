@@ -38,7 +38,7 @@ public class ContatoDAO {
     }
 
     public List<Contato> listarContatos(){
-        Cursor cursor = getDatabase().query(DatabaseHelper.Contatos.TABELA, DatabaseHelper.Contatos.COLUNAS, null, null, null, null, null);
+        Cursor cursor = getDatabase().query(DatabaseHelper.Contatos.TABELA, DatabaseHelper.Contatos.COLUNAS, null, null, null, null, DatabaseHelper.Contatos.CntRazSocial);
 
         List<Contato> contatos = new ArrayList<Contato>();
         while (cursor.moveToNext()){

@@ -1,6 +1,9 @@
 package br.com.sistemasecia.contato;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,19 +14,23 @@ import android.widget.Toast;
 
 import dao.ContatoDAO;
 import model.Contato;
+import util.Mensagem;
 
 
-public class CadContatoActivity extends ActionBarActivity {
+public class CadContatoActivity extends ActionBarActivity implements DialogInterface.OnClickListener {
 
     private ContatoDAO contatoDAO;
     private EditText etRazaoSocial, etTelefone, etPessoa;
     private Contato contato;
     private int codigo;
+    private AlertDialog mensagemConfirmacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cad_contato);
+
+        mensagemConfirmacao = Mensagem.criarDialogConfirmacao(this);
 
         etRazaoSocial = (EditText) findViewById(R.id.etRazaoSocial);
         etTelefone = (EditText) findViewById(R.id.etTelefone);
@@ -54,19 +61,35 @@ public class CadContatoActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         switch (id) {
-            case R.id.action_cadastro_excluir:
-                if(codigo > 0) {
-                    contatoDAO.removeContato(codigo);
-                    Toast.makeText(this, "Contato removido com sucesso!", Toast.LENGTH_SHORT).show();
-                }
-                finish();
-                startActivity(new Intent(this, ListaContatoActivity.class));
-                break;
             case R.id.action_cadastro_salvar:
                 this.cadastrar();
                 break;
+            case R.id.action_cadastro_ligar:
+                String telefone = etTelefone.getText().toString();
+                if(telefone != null && telefone.equals("") == false) {
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:" + telefone));
+                    startActivity(callIntent);
+                }
+            case R.id.action_cadastro_excluir:
+                if(codigo > 0) {
+                    mensagemConfirmacao.show();
+                }
+                break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+
+        switch (which){
+            case DialogInterface.BUTTON_POSITIVE:
+                contatoDAO.removeContato(codigo);
+                Toast.makeText(this, "Contato removido com sucesso!", Toast.LENGTH_SHORT).show();
+                finish();
+                startActivity(new Intent(this, ListaContatoActivity.class));
+        }
     }
 
     private void cadastrar(){
@@ -108,4 +131,5 @@ public class CadContatoActivity extends ActionBarActivity {
             }
         }
     }
+
 }

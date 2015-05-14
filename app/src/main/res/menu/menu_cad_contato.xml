@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="br.com.sistemasecia.contato.CadContatoActivity">
 
+    <item android:id="@+id/action_cadastro_ligar"
+        android:title="Ligar"
+        android:icon="@drawable/ic_action_phone"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom|withText" />
+
     <item android:id="@+id/action_cadastro_salvar"
         android:title="Salvar"
         android:icon="@drawable/ic_action_save"
