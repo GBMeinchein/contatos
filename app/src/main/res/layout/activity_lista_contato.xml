@@ -2,15 +2,26 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="br.com.sistemasecia.contato.ListaContatoActivity">
+    tools:context="br.com.sistemasecia.contato.ListaContatoActivity"
+    android:orientation="vertical">
 
-    <ListView
-        android:layout_width="wrap_content"
+    <EditText
+        android:layout_width="355dp"
         android:layout_height="wrap_content"
-        android:id="@+id/lvContatos"
+        android:id="@+id/etContato"
+        android:hint="Contato"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignRight="@+id/lvContatos"
+        android:layout_alignEnd="@+id/lvContatos" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lvContatos"
+        android:layout_below="@+id/etContato"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>

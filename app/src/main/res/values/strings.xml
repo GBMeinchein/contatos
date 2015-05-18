@@ -9,4 +9,5 @@
     <string name="erro">Erro!</string>
     <string name="cor">#FF2070B0</string>
     <string name="title_activity_login_activiy">Login</string>
+    <string name="title_activity_search_results">SearchResultsActivity</string>
 </resources>

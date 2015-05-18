@@ -67,10 +67,11 @@ public class CadContatoActivity extends ActionBarActivity implements DialogInter
             case R.id.action_cadastro_ligar:
                 String telefone = etTelefone.getText().toString();
                 if(telefone != null && telefone.equals("") == false) {
-                    Intent callIntent = new Intent(Intent.ACTION_CALL);
-                    callIntent.setData(Uri.parse("tel:" + telefone));
-                    startActivity(callIntent);
+                    //Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    //callIntent.setData(Uri.parse("tel:" + telefone));
+                    //startActivity(callIntent);
                 }
+                break;
             case R.id.action_cadastro_excluir:
                 if(codigo > 0) {
                     mensagemConfirmacao.show();
