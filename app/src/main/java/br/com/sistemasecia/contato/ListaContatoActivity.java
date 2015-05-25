@@ -1,5 +1,6 @@
 package br.com.sistemasecia.contato;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActionBar;
@@ -9,6 +10,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
@@ -37,16 +39,18 @@ import adapter.ContatoAdapter;
 import adapter.ContatoArrayAdapter;
 import dao.ContatoDAO;
 import model.Contato;
+import util.Mensagem;
 
-public class ListaContatoActivity extends ActionBarActivity implements AdapterView.OnItemClickListener{
+//@SuppressLint("NewApi")
+public class ListaContatoActivity extends Activity{//ActionBarActivity implements AdapterView.OnItemClickListener, DialogInterface.OnClickListener{
 
     private ListView listView;
     private ContatoDAO contatoDAO;
     private List<Contato> contatoList;
     private ContatoArrayAdapter contatoAdapter;
-    private int idPosicao;
+    private int idPosicao, oldPosicao;
     private EditText etContato;
-    private AlertDialog mensagemConfirmacao;
+    private AlertDialog alertDialog, alertConfirmacao;
     private Context contexto;
 
     @Override
@@ -58,13 +62,31 @@ public class ListaContatoActivity extends ActionBarActivity implements AdapterVi
         contatoList = contatoDAO.listarContatos();
         contatoAdapter = new ContatoArrayAdapter<Contato>(this, contatoList);
 
+        alertDialog      = Mensagem.criarAlertDialog(this);
+        alertConfirmacao = Mensagem.criarDialogConfirmacao(this);
+
         etContato = (EditText) findViewById(R.id.etContato);
 
         listView = (ListView) findViewById(R.id.lvContatos);
         listView.setAdapter(contatoAdapter);
 
-        listView.setOnItemClickListener(this);
+        //listView.setTextFilterEnabled(true);
+        //listView.setSelected(true);
+        //listView.setOnItemClickListener(this);
+/*
+        ActionBar actionBar = this.getActionBar();
+        EditText search = (EditText) actionBar.getCustomView().findViewById(R.id.txt_search);
+        search.setOnEditorActionListener(new OnEditorActionListener() {
 
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                //Toast.makeText(ListaContatoActivity.this, "Search triggered", Toast.LENGTH_LONG).show();
+                return false;
+            }
+        });
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM
+                | ActionBar.DISPLAY_SHOW_HOME);
+*/
         etContato.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -85,65 +107,15 @@ public class ListaContatoActivity extends ActionBarActivity implements AdapterVi
         });
     }
 
-
+/*
     //@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_lista_contato, menu);
 
-        //SearchView searchView=new SearchView(this);
-
-        //MenuItem searchItem = menu.findItem(R.id.etContato);
-        //SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        //searchView.setQueryHint("Pesquisar");
-/*
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                                              public boolean onQueryTextChange(String newText) {
-
-                                                  contatoAdapter.getFilter().filter(newText);
-
-                                                  return true;
-
-
-                                              }
-
-                                              public boolean onQueryTextSubmit(String query) {
-                                                  contatoAdapter.getFilter().filter(query);
-
-                                                  return true;
-                                              }
-                                          }
-        );*/
-        /*MenuItem item=menu.findItem(R.id.item_busca);
-        searchView=(SearchView)item.getActionView();
-        */
-        //m.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        //m.setActionView(searchView);
-/*
-        View v = (View) menu.findItem(R.id.search).getActionView();
-
-        EditText txtSearch = ( EditText ) v.findViewById(R.id.txt_search);
-
-        txtSearch.setOnEditorActionListener(new OnEditorActionListener() {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                Toast.makeText(getBaseContext(), "Search : " + v.getText(), Toast.LENGTH_SHORT).show();
-                return false;
-           }
-        });
-*/
         return super.onCreateOptionsMenu(menu);
 
-    }
-
-    public boolean onPrepareOptionsMenu(Menu menu){
-
-        menu.add(0, R.id.etContato, 1, "busca");
-        menu.add(0, 1, 1, "busca2");
-        return true;
     }
 
     @Override
@@ -152,11 +124,27 @@ public class ListaContatoActivity extends ActionBarActivity implements AdapterVi
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        int codigoContato = contatoList.get(idPosicao).getCodigo();
         //noinspection SimplifiableIfStatement
         switch (id){
             case R.id.action_lista_cadastrar:
                 startActivity(new Intent(this, CadContatoActivity.class));
+                break;
+            case R.id.action_lista_editar:
+                Intent intent = new Intent(this, CadContatoActivity.class);
+                intent.putExtra("CONTATO_CODIGO", codigoContato);
+                startActivity(intent);
+                break;
+            case R.id.action_lista_excluir:
+                alertConfirmacao.show();
+                break;
+            case DialogInterface.BUTTON_POSITIVE:
+                contatoList.remove(idPosicao);
+                contatoDAO.removeContato(codigoContato);
+                listView.invalidateViews();
+                break;
+            case DialogInterface.BUTTON_NEGATIVE:
+                alertConfirmacao.dismiss();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -164,13 +152,54 @@ public class ListaContatoActivity extends ActionBarActivity implements AdapterVi
 
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        idPosicao = position;
+        listView.setItemChecked(position, true);
+        if(idPosicao == 0 || position != idPosicao){
+            parent.getChildAt(idPosicao).setBackgroundColor(Color.parseColor("#EEE9E9"));
+            parent.getChildAt(position).setBackgroundColor(Color.parseColor("#3366FF"));
+            idPosicao = position;
+        }*/
+        //listView.getChildAt(position).setBackgroundColor(0x3366FF);
+        //view.setBackgroundColor(0x3366FF);
+        //Toast.makeText(this, "etrando ha", Toast.LENGTH_SHORT).show();
+        //alertDialog.show();
         //Toast.makeText(this, "entrando metodo", Toast.LENGTH_SHORT).show();
+        /*
         Intent intent = new Intent(this, CadContatoActivity.class);
         int codigo = contatoList.get(idPosicao).getCodigo();
         intent.putExtra("CONTATO_CODIGO", codigo);
-        startActivity(intent);
-    }
+        startActivity(intent);*/
+   /* }
 
+
+    //@Override
+    public void onClick(DialogInterface dialog, int which) {
+
+        int id = contatoList.get(idPosicao).getCodigo();
+
+        switch (which){
+            case 0:
+                Intent intent = new Intent(this, CadContatoActivity.class);
+                intent.putExtra("USUARIO_CODIGO", id);
+                startActivity(intent);
+                break;
+            case 1:
+                //liga
+                break;
+            case 2:
+                alertConfirmacao.show();
+                break;
+            case DialogInterface.BUTTON_POSITIVE:
+                contatoList.remove(idPosicao);
+                contatoDAO.removeContato(id);
+                listView.invalidateViews();
+                break;
+            case DialogInterface.BUTTON_NEGATIVE:
+                alertConfirmacao.dismiss();
+                break;
+            case 3:
+
+                break;
+        }
+    }*/
 
 }

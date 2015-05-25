@@ -1,18 +1,30 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/action_lista_procurar"
-        android:icon="@drawable/ic_action_search"
+    <item android:id="@+id/action_cadastro_ligar"
+        android:title="Ligar"
+        android:icon="@drawable/ic_action_phone"
         android:orderInCategory="100"
-        app:showAsAction="ifRoom|withText"
-        android:title="" />
+        app:showAsAction="always" />
+
+    <item android:id="@+id/action_lista_excluir"
+        android:title="Excluir"
+        android:icon="@drawable/ic_action_discard"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/action_lista_editar"
+        android:icon="@drawable/ic_action_edit"
+        android:orderInCategory="100"
+        android:title="editar"
+        app:showAsAction="always"/>
 
     <item android:id="@+id/action_lista_cadastrar"
         android:icon="@drawable/ic_action_new"
         android:orderInCategory="100"
-        app:showAsAction="ifRoom|withText"
-        android:title="" />
-
+        android:title="Novo"
+        app:showAsAction="always"/>
+<!--
     <item
         android:id="@+id/search"
         android:title="Search"
@@ -20,7 +32,7 @@
         android:actionLayout="@layout/search_layout"
 
         />
-<!--
+
     <item
         android:id="@+id/search"
         android:title="Search"

@@ -2,6 +2,7 @@ package adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,8 +29,9 @@ public class ContatoArrayAdapter<T> extends ArrayAdapter{
     private List<Contato> itens_exibicao;
     private String prefix1, prefix2, prefix3 = "", prefix4 = "", prefix5 = "";
     private String prefixAux;
-    private int tamanho;
+    private int tamanho, selected;
     private String valor, valorSemUltimaVirgula, primeiroCaracter;
+
 
     public ContatoArrayAdapter(Context context, List<Contato> contatos) {
         super(context, R.layout.activity_contatos, contatos);
@@ -75,6 +77,15 @@ public class ContatoArrayAdapter<T> extends ArrayAdapter{
         return itens_exibicao.get(arg0);
     }
 
+    public List<Contato> getLista(){
+        return itens_exibicao;
+    }
+
+    public void select(int position) {
+        this.selected = position;
+        notifyDataSetChanged();
+    }
+
     public View getView(int position, View view, ViewGroup parent) {
         Contato contato = itens_exibicao.get(position);
 
@@ -84,6 +95,13 @@ public class ContatoArrayAdapter<T> extends ArrayAdapter{
         }
 
         TextView tvContatoNome = (TextView) view.findViewById(R.id.tvContatoNome);
+
+        if(selected != -1 && position == selected) {
+            tvContatoNome.setBackgroundColor(Color.parseColor("#3366FF"));
+        }else{
+            tvContatoNome.setBackgroundColor(Color.parseColor("#EEE9E9"));
+        }
+
         tvContatoNome.setText(contato.getRazao() + " / " + contato.getNome());
         return view;
     }

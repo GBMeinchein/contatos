@@ -17,4 +17,19 @@ public class Mensagem {
 
         return alert.create();
     }
+
+
+    public static AlertDialog criarAlertDialog(Activity activity){
+        final CharSequence[] items = {
+                "Editar",
+                "Ligar",
+                "Excluir",
+                "Cancelar"
+        };
+
+        AlertDialog.Builder alert= new AlertDialog.Builder(activity);
+        alert.setTitle("Opções");
+        alert.setItems(items, (DialogInterface.OnClickListener) activity);
+        return alert.create();
+    }
 }

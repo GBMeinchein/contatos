@@ -29,14 +29,13 @@
             android:label="@string/title_activity_cad_contato" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ListaContatoActivity" />
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
