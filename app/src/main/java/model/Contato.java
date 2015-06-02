@@ -9,16 +9,38 @@ public class Contato {
     private String razao;
     private String nome;
     private String telefone;
+    private String celular;
+    private String email;
+    private String origem;
 
     public Contato(){
 
     }
 
-    public Contato(int codigo, String razao, String nome, String telefone) {
+    public Contato(int codigo, String razao, String nome, String telefone, String celular, String email, String origem) {
         this.codigo = codigo;
         this.razao = razao;
         this.nome = nome;
         this.telefone = telefone;
+        this.celular = celular;
+        this.email = email;
+        this.origem = origem;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
 
     public int getCodigo() {
@@ -51,6 +73,14 @@ public class Contato {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getOrigem() {
+        return origem;
+    }
+
+    public void setOrigem(String origem) {
+        this.origem = origem;
     }
 
     @Override

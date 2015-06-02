@@ -14,16 +14,35 @@
         android:id="@+id/etSenha"
         android:hint="Senha"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="179dp" />
+        android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="105dp"
         android:layout_height="wrap_content"
         android:text="Entrar"
         android:id="@+id/btEntrar"
-        android:layout_below="@+id/etSenha"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/cbAtualizaContatos"
+        android:layout_alignLeft="@+id/cbAtualizaContatos"
+        android:layout_alignStart="@+id/cbAtualizaContatos" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Atualizar contatos"
+        android:id="@+id/cbAtualizaContatos"
+        android:layout_alignTop="@+id/etSenha"
+        android:layout_alignLeft="@+id/etSenha"
+        android:layout_alignStart="@+id/etSenha"
+        android:layout_marginTop="45dp" />
+
+    <Button
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:text="Senha"
+        android:id="@+id/btSenha"
+        android:layout_alignTop="@+id/btEntrar"
+        android:layout_toRightOf="@+id/btEntrar"
+        android:layout_toEndOf="@+id/btEntrar" />
 
 
 </RelativeLayout>

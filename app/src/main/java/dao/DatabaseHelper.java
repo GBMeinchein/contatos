@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper{
 
     private static final String BANCO_DADOS = "SecContato";
-    private static final int VERSAO = 1;
+    private static final int VERSAO = 5;
 
     public DatabaseHelper(Context context){
         super(context, BANCO_DADOS, null, VERSAO);
@@ -23,16 +23,26 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                  + "CntCodigo INTEGER PRIMARY KEY AUTOINCREMENT, "
                  + "CntRazSocial VARCHAR(90), "
                  + "CntNomePessoa VARCHAR(50), "
-                 + "CntTelefone VARCHAR(24)) "
+                 + "CntTelefone VARCHAR(24), "
+                 + "CntCelular VARCHAR(24), "
+                 + "CntEmail VARCHAR(60), "
+                 + "CntOrigem VARCHAR(1)) "
         );
 
-        db.execSQL("INSERT INTO Contatos(CntRazSocial, CntNomePessoa, CntTelefone) VALUES('Sistemas e Cia', 'Milto Ziehlsdorf', '33702192')");
-        db.execSQL("INSERT INTO Contatos(CntRazSocial, CntNomePessoa, CntTelefone) VALUES('Rosil', 'Catarina de Jesus', '32732000')");
+        //Tabela de senhas
+        db.execSQL("CREATE TABLE Senhas("
+                        + "SenCodigo INTEGER PRIMARY KEY AUTOINCREMENT, "
+                        + "SenValor VARCHAR(90))"
+        );
+
+        db.execSQL("INSERT INTO Senhas VALUES(1, 'asd')");
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE Contatos");
+        db.execSQL("DROP TABLE Senhas");
         onCreate(db);
     }
 
@@ -42,10 +52,22 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         public static final String CntRazSocial = "CntRazSocial";
         public static final String CntNomePessoa = "CntNomePessoa";
         public static final String CntTelefone = "CntTelefone";
+        public static final String CntCelular = "CntCelular";
+        public static final String CntEmail = "CntEmail";
+        public static final String CntOrigem = "CntOrigem";
 
         public static final String[] COLUNAS = new String[]{
-            CntCodigo, CntRazSocial, CntNomePessoa, CntTelefone
+            CntCodigo, CntRazSocial, CntNomePessoa, CntTelefone, CntCelular, CntEmail, CntOrigem
         };
     }
 
+    public static class Senhas{
+        public static final String TABELA = "Senhas";
+        public static final String SenCodigo = "SenCodigo";
+        public static final String SenValor = "SenValor";
+
+        public static final String[] COLUNAS = new String[]{
+                SenCodigo, SenValor
+        };
+    }
 }

@@ -5,8 +5,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
+import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -28,7 +32,7 @@ import model.Contato;
 import util.Mensagem;
 
 
-public class MainActivity extends Activity implements AdapterView.OnItemClickListener{//}, DialogInterface.OnClickListener {
+public class MainActivity extends Activity implements AdapterView.OnItemClickListener, DialogInterface.OnClickListener {
 
     private ListView listView;
     private ContatoDAO contatoDAO;
@@ -37,10 +41,13 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private int idPosicao = -1, oldPosicao, codigoContato, selected;
     private EditText etContato;
     private Button btEditar, btExcluir, btLigar, btAdicionar, btLimpar;
-    //private AlertDialog alertDialog, alertConfirmacao;
+    private AlertDialog alertDialogEmail,alertConfirmacao;
     private Context contexto;
+    private Activity activity;
+    private View view;
     private AdapterView<?> adapterView;
     private Contato contatoSelecionado;
+    private String telefone, celular, emailContato, qualAlert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +58,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         contatoList = contatoDAO.listarContatos();
         contatoAdapter = new ContatoArrayAdapter<Contato>(this, contatoList);
         contexto = this;
-        //alertConfirmacao = Mensagem.criarDialogConfirmacao(this);
+        activity = this;
+        view = findViewById(R.id.vwLista);
+        view.setBackgroundColor(Color.parseColor("#FFEC8B"));
+        //alertConfirmacao = Mensagem.criarAlertDialog(this, opcoes);
 
         etContato = (EditText) findViewById(R.id.etContato);
 
@@ -109,12 +119,20 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         btLigar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 contatoList = contatoAdapter.getLista();
-                String telefone = contatoList.get(idPosicao).getTelefone();
-                contatoAdapter.getItem(selected);
-                if(telefone != null && telefone.equals("") == false) {
-                    Intent callIntent = new Intent(Intent.ACTION_CALL);
-                    callIntent.setData(Uri.parse("tel:" + telefone));
-                    startActivity(callIntent);
+                telefone = contatoList.get(idPosicao).getTelefone();
+                celular = contatoList.get(idPosicao).getCelular();
+                if(celular == null){
+                    contatoAdapter.getItem(selected);
+                    if(telefone != null && telefone.equals("") == false) {
+                        Intent callIntent = new Intent(Intent.ACTION_CALL);
+                        callIntent.setData(Uri.parse("tel:" + telefone));
+                        startActivity(callIntent);
+                    }
+                }else{
+                    CharSequence[] opcoes = {telefone, celular};
+                    qualAlert = "ligar";
+                    alertConfirmacao = Mensagem.criarAlertDialog(activity, opcoes);
+                    alertConfirmacao.show();
                 }
             }
         });
@@ -136,7 +154,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         //        alertConfirmacao.show();
         //    }
         //});
-
 
         etContato.addTextChangedListener(new
 
@@ -167,6 +184,14 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         adapterView = parent;
         //idPosicao = position;
 
+        if(selected == position){
+
+            qualAlert = "mensagem";
+            AlertDialog alertDialogEmail = Mensagem.opcoesEmail(this);
+            alertDialogEmail.show();
+
+         }
+
         if(idPosicao == -1){
             //Apaga botoes de limpar e adicionar
             btAdicionar.setVisibility(View.INVISIBLE);
@@ -176,6 +201,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
            //btExcluir.setVisibility(View.VISIBLE);
             btEditar.setVisibility(View.VISIBLE);
             btLigar.setVisibility(View.VISIBLE);
+
         }
         if(idPosicao == -1 || position != idPosicao){
             //Toast.makeText(getApplicationContext(), Integer.toString(position), Toast.LENGTH_SHORT).show();
@@ -188,6 +214,57 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             idPosicao = position;
         }
     }
+
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+        switch (which){
+            case 0:
+                if (qualAlert == "ligar") {
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:" + telefone));
+                    startActivity(callIntent);
+                    break;
+                }else {
+                    contatoList = contatoAdapter.getLista();
+                    emailContato = contatoList.get(selected).getEmail();
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    //intent.setType("message/rfc822");
+
+                    intent.setType("plain/text");
+                    intent.putExtra(Intent.EXTRA_EMAIL, new String[]{emailContato});
+                    //intent.putExtra(Intent.EXTRA_SUBJECT, "Recado");
+                    //intent.putExtra(Intent.EXTRA_TEXT, "enviando email");
+                    Intent mailer = Intent.createChooser(intent, null);
+                    startActivity(mailer);
+                    break;
+                }
+            case 1:
+                if (qualAlert == "ligar") {
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:" + celular));
+                    startActivity(callIntent);
+                    break;
+                }else {
+                    contatoList = contatoAdapter.getLista();
+                    celular = contatoList.get(selected).getCelular();
+                    Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+                    smsIntent.setType("vnd.android-dir/mms-sms");
+                    smsIntent.putExtra("address", celular);
+                    //smsIntent.putExtra("sms_body","Body of Message");
+                    startActivity(smsIntent);
+                    break;
+                }
+            case 2:
+                contatoList = contatoAdapter.getLista();
+                celular = contatoList.get(selected).getCelular();
+                Uri uri = Uri.parse("smsto:" + celular);
+                Intent i = new Intent(Intent.ACTION_SENDTO, uri);
+                i.setPackage("com.whatsapp");
+                startActivity(Intent.createChooser(i, ""));
+                break;
+        }
+    }
+
 /*
     @Override
     public void onClick(DialogInterface dialog, int which) {

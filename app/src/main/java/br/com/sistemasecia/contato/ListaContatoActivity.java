@@ -62,7 +62,7 @@ public class ListaContatoActivity extends Activity{//ActionBarActivity implement
         contatoList = contatoDAO.listarContatos();
         contatoAdapter = new ContatoArrayAdapter<Contato>(this, contatoList);
 
-        alertDialog      = Mensagem.criarAlertDialog(this);
+        //alertDialog      = Mensagem.criarAlertDialog(this);
         alertConfirmacao = Mensagem.criarDialogConfirmacao(this);
 
         etContato = (EditText) findViewById(R.id.etContato);

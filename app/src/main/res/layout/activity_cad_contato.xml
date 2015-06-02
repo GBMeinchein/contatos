@@ -1,100 +1,173 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="8dp"
     android:paddingRight="8dp"
     tools:context="br.com.sistemasecia.contato.CadContatoActivity">
 
-    <Button
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:text="Voltar"
-        android:id="@+id/btVoltar"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|left"
+        android:orientation="vertical">
 
-    <Button
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:text="Salvar"
-        android:id="@+id/btConfirma"
-        android:layout_alignTop="@+id/btExclui"
-        android:layout_toLeftOf="@+id/btExclui"
-        android:layout_toStartOf="@+id/btExclui" />
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="Voltar"
+            android:id="@+id/btVoltar"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-    <Button
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:text="Excluir"
-        android:id="@+id/btExclui"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/etRazaoSocial"
-        android:layout_alignEnd="@+id/etRazaoSocial" />
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="Salvar"
+            android:id="@+id/btConfirma"
+            android:layout_alignTop="@+id/btExclui"
+            android:layout_toLeftOf="@+id/btExclui"
+            android:layout_toStartOf="@+id/btExclui" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Razão social"
-        android:id="@+id/tvRazaoSocial"
-        android:typeface="serif"
-        android:layout_below="@+id/btVoltar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="Excluir"
+            android:id="@+id/btExclui"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/etRazaoSocial"
+            android:layout_alignEnd="@+id/etRazaoSocial" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/etRazaoSocial"
-        android:layout_below="@+id/tvRazaoSocial"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Razão social"
+            android:id="@+id/tvRazaoSocial"
+            android:typeface="serif"
+            android:layout_below="@+id/btVoltar"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Telefone"
-        android:id="@+id/txTelefone"
-        android:typeface="serif"
-        android:layout_below="@+id/etRazaoSocial"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/etRazaoSocial"
+            android:layout_below="@+id/tvRazaoSocial"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:ems="10"
-        android:id="@+id/etTelefone"
-        android:layout_below="@+id/txTelefone"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/etRazaoSocial"
-        android:layout_alignEnd="@+id/etRazaoSocial" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Telefone"
+            android:id="@+id/txTelefone"
+            android:typeface="serif"
+            android:layout_below="@+id/etRazaoSocial"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Pessoa"
-        android:id="@+id/tvPessoa"
-        android:typeface="serif"
-        android:layout_below="@+id/etTelefone"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:ems="10"
+            android:id="@+id/etTelefone"
+            android:layout_below="@+id/txTelefone"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/etRazaoSocial"
+            android:layout_alignEnd="@+id/etRazaoSocial" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/etPessoa"
-        android:layout_below="@+id/tvPessoa"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Pessoa"
+            android:id="@+id/tvPessoa"
+            android:typeface="serif"
+            android:layout_below="@+id/etCelular"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/etPessoa"
+            android:layout_below="@+id/tvPessoa"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Origem do cadastro"
+            android:id="@+id/tvOrigem"
+            android:typeface="serif"
+            android:layout_below="@+id/etEmail"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <CheckBox
+            android:id="@+id/cbOrigem"
+            android:layout_width="fill_parent"
+            android:text="Manual"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvOrigem"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Celular"
+            android:id="@+id/tvCelular"
+            android:typeface="serif"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/etTelefone"
+            android:layout_alignRight="@+id/etTelefone"
+            android:layout_alignEnd="@+id/etTelefone" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/etCelular"
+            android:inputType="phone"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvCelular"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Email"
+            android:id="@+id/tvEmail"
+            android:typeface="serif"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/etPessoa"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/etEmail"
+            android:layout_below="@+id/tvEmail"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/btExclui"
+            android:layout_alignEnd="@+id/btExclui" />
+    </RelativeLayout>
+
+</ScrollView>

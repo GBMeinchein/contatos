@@ -2,10 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="8dp"
     android:paddingRight="8dp"
+    android:backgroundTint="#DEB887"
+    android:id="@+id/vwLista"
     tools:context=".MainActivity">
 
     <EditText
-        android:layout_width="190dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/etContato"
         android:hint="Empresa/Pessoa"
@@ -25,8 +27,8 @@
     <Button
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:text="Ligar"
-        android:id="@+id/btLigar"
+        android:text="Editar"
+        android:id="@+id/btEditar"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -35,11 +37,11 @@
     <Button
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:text="Editar"
-        android:id="@+id/btEditar"
-        android:layout_alignBottom="@+id/btLigar"
-        android:layout_toStartOf="@+id/btLigar"
-        android:layout_toLeftOf="@+id/btLigar" />
+        android:text="Ligar"
+        android:id="@+id/btLigar"
+        android:layout_alignBottom="@+id/btEditar"
+        android:layout_toStartOf="@+id/btEditar"
+        android:layout_toLeftOf="@+id/btEditar" />
 
     <Button
         android:layout_width="80dp"

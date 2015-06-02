@@ -11,8 +11,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -24,12 +27,14 @@ import util.Mensagem;
 public class CadContatoActivity extends Activity implements DialogInterface.OnClickListener {
 
     private ContatoDAO contatoDAO;
-    private EditText etRazaoSocial, etTelefone, etPessoa;
+    private EditText etRazaoSocial, etTelefone, etPessoa, etOrigem, etCelular, etEmail;
+    private CheckBox cbOrigem;
     private Button btSalvar, btExcluir, btVoltar;
     private Contato contato;
     private int codigo;
     private AlertDialog mensagemConfirmacao;
     private Context contexto;
+    private static final String[] origens = new String[]{"Manual", "Importado"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +48,14 @@ public class CadContatoActivity extends Activity implements DialogInterface.OnCl
         etRazaoSocial = (EditText) findViewById(R.id.etRazaoSocial);
         etTelefone = (EditText) findViewById(R.id.etTelefone);
         etPessoa = (EditText) findViewById(R.id.etPessoa);
+        etCelular = (EditText) findViewById(R.id.etCelular);
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        cbOrigem = (CheckBox) findViewById(R.id.cbOrigem);
         btVoltar = (Button) findViewById(R.id.btVoltar);
         btSalvar = (Button) findViewById(R.id.btConfirma);
         btExcluir = (Button) findViewById(R.id.btExclui);
+
+        cbOrigem.setChecked(true);
 
         contatoDAO = new ContatoDAO(this);
 
@@ -55,7 +65,15 @@ public class CadContatoActivity extends Activity implements DialogInterface.OnCl
             contato = contatoDAO.buscarContatoPorCodigo(codigo);
             etRazaoSocial.setText(contato.getRazao());
             etTelefone.setText(contato.getTelefone());
+            etCelular.setText(contato.getCelular());
+            etEmail.setText(contato.getEmail());
             etPessoa.setText(contato.getNome());
+            String origem = contato.getOrigem();
+            if(origem.equals("I")){
+                cbOrigem.setChecked(false);
+            }else if (origem.equals("M")){
+                cbOrigem.setChecked(true);
+            }
             setTitle("Atualizar");
         }
 
@@ -75,7 +93,9 @@ public class CadContatoActivity extends Activity implements DialogInterface.OnCl
 
                 String razaoSocial = etRazaoSocial.getText().toString();
                 String telefone = etTelefone.getText().toString();
+                String celular = etCelular.getText().toString();
                 String pessoa = etPessoa.getText().toString();
+                String email = etEmail.getText().toString();
 
                 if(razaoSocial == null || razaoSocial.equals("")){
                     valida = false;
@@ -92,6 +112,13 @@ public class CadContatoActivity extends Activity implements DialogInterface.OnCl
                     contato.setRazao(razaoSocial);
                     contato.setTelefone(telefone);
                     contato.setNome(pessoa);
+                    contato.setCelular(celular);
+                    contato.setEmail(email);
+                    if(cbOrigem.isChecked()){
+                        contato.setOrigem("M"); //Origem de cadastro Manual(M)
+                    }else{
+                        contato.setOrigem("I");
+                    }
 
                     //Para atualizar
                     if(codigo > 0){
@@ -163,6 +190,4 @@ public class CadContatoActivity extends Activity implements DialogInterface.OnCl
                 startActivity(new Intent(this, MainActivity.class));
         }
     }
-
-
 }

@@ -19,12 +19,20 @@ public class Mensagem {
     }
 
 
-    public static AlertDialog criarAlertDialog(Activity activity){
+    public static AlertDialog criarAlertDialog(Activity activity, CharSequence[] fones){
+        final CharSequence[] items =  fones;
+
+        AlertDialog.Builder alert= new AlertDialog.Builder(activity);
+        alert.setTitle("Números");
+        alert.setItems(items, (DialogInterface.OnClickListener) activity);
+        return alert.create();
+    }
+
+    public static AlertDialog opcoesEmail(Activity activity){
         final CharSequence[] items = {
-                "Editar",
-                "Ligar",
-                "Excluir",
-                "Cancelar"
+                "Email",
+                "Mensagem",
+                "WhatsApp"
         };
 
         AlertDialog.Builder alert= new AlertDialog.Builder(activity);
