@@ -75,6 +75,10 @@ public class ContatoDAO {
         return getDatabase().delete(DatabaseHelper.Contatos.TABELA, "CntRazSocial = ? and CntOrigem = 'I'", new String[]{razao}) > 0;
     }
 
+    public boolean removeTodosContatos(){
+        return getDatabase().delete(DatabaseHelper.Contatos.TABELA, "", new String[]{}) > 0;
+    }
+
     public Contato buscarContatoPorCodigo(int codigo){
         Cursor cursor = getDatabase().query(DatabaseHelper.Contatos.TABELA, DatabaseHelper.Contatos.COLUNAS, "CntCodigo = ?", new String[]{Integer.toString(codigo)}, null, null, null);
 

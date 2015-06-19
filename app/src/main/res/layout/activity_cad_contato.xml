@@ -37,6 +37,7 @@
             android:layout_alignRight="@+id/etRazaoSocial"
             android:layout_alignEnd="@+id/etRazaoSocial" />
 
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,6 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/etRazaoSocial"
+            android:inputType="textCapSentences"
             android:layout_below="@+id/tvRazaoSocial"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -62,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Telefone"
+            android:text="Telefone fixo"
             android:id="@+id/txTelefone"
             android:typeface="serif"
             android:layout_below="@+id/etRazaoSocial"
@@ -73,7 +75,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="phone"
-            android:ems="10"
             android:id="@+id/etTelefone"
             android:layout_below="@+id/txTelefone"
             android:layout_alignParentLeft="true"
@@ -96,6 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/etPessoa"
+            android:inputType="textCapSentences"
             android:layout_below="@+id/tvPessoa"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"

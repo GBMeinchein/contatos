@@ -55,9 +55,10 @@ public class LoginActivity extends Activity {
                         final String nomeArquivo = file + "/listaContatos.txt";
 
                         Scanner scanner = null;
-                        String razao, telefone, celular, pessoa;
+                        String razao, telefone, celular, pessoa, email;
 
                         try {
+                            //contatoDAO.removeTodosContatos();
                             contato = new Contato();
                             scanner = new Scanner(new FileReader(nomeArquivo)).useDelimiter("\\||\\n");
                             while (scanner.hasNext()) {
@@ -65,11 +66,13 @@ public class LoginActivity extends Activity {
                                 telefone = scanner.next();
                                 celular = scanner.next();
                                 pessoa = scanner.next();
+                                email = scanner.next();
 
                                 contato.setRazao(razao);
                                 contato.setTelefone(telefone);
                                 contato.setCelular(celular);
                                 contato.setNome(pessoa);
+                                contato.setEmail(email);
                                 contato.setOrigem("I");//Origem de cadastro Importado(I)
 
                                 contatoDAO.removeContatoPorRazao(contato.getRazao());
@@ -78,7 +81,7 @@ public class LoginActivity extends Activity {
                             scanner.close();
 
                         } catch (FileNotFoundException e) {
-                            Toast.makeText(getApplicationContext(), "O arquivo para atualização não foi encontrado!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "O arquivo para atualização não foi encontrado no caminho: "+nomeArquivo, Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }

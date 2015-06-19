@@ -60,14 +60,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         contexto = this;
         activity = this;
         view = findViewById(R.id.vwLista);
-        view.setBackgroundColor(Color.parseColor("#FFEC8B"));
-        //alertConfirmacao = Mensagem.criarAlertDialog(this, opcoes);
+        view.setBackgroundColor(Color.parseColor("#363636"));
 
         etContato = (EditText) findViewById(R.id.etContato);
 
         btAdicionar = (Button) findViewById(R.id.btNovo);
         btEditar = (Button) findViewById(R.id.btEditar);
-        //btExcluir = (Button) findViewById(R.id.btExcluir);
         btLigar = (Button) findViewById(R.id.btLigar);
         btLimpar = (Button) findViewById(R.id.btLimpar);
 
@@ -75,7 +73,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         listView.setAdapter(contatoAdapter);
 
         //campos apagados quando iniciado
-        //btExcluir.setVisibility(View.INVISIBLE);
         btEditar.setVisibility(View.INVISIBLE);
         btLigar.setVisibility(View.INVISIBLE);
 
@@ -91,7 +88,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 btLimpar.setVisibility(View.VISIBLE);
 
                 //Liga botões de editar
-                //btExcluir.setVisibility(View.INVISIBLE);
                 btEditar.setVisibility(View.INVISIBLE);
                 btLigar.setVisibility(View.INVISIBLE);
                 //adapterView.getChildAt(idPosicao).setBackgroundColor(Color.parseColor("#EEE9E9")); //apaga posição antiga

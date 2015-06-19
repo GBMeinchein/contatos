@@ -28,7 +28,7 @@ public class ContatoArrayAdapter<T> extends ArrayAdapter{
     private List<Contato> itens;
     private List<Contato> itens_exibicao;
     private String prefix1, prefix2, prefix3 = "", prefix4 = "", prefix5 = "";
-    private String prefixAux, celular;
+    private String prefixAux, celular, telefone;
     private int tamanho, selected;
     private String valor, valorSemUltimaVirgula, primeiroCaracter;
 
@@ -100,7 +100,13 @@ public class ContatoArrayAdapter<T> extends ArrayAdapter{
             tvContatoNome.setBackgroundColor(Color.parseColor("#3366FF"));
         }else{
             //tvContatoNome.setBackgroundColor(Color.parseColor("#EEE9E9"));
-            tvContatoNome.setBackgroundColor(Color.parseColor("#FFEC8B"));
+            tvContatoNome.setBackgroundColor(Color.parseColor("#363636"));
+        }
+
+        if(contato.getTelefone().equals("") == false){
+            telefone = " / " + contato.getTelefone();
+        }else{
+            telefone = "";
         }
 
         if(contato.getCelular().equals("") == false){
@@ -109,7 +115,7 @@ public class ContatoArrayAdapter<T> extends ArrayAdapter{
             celular = "";
         }
 
-        tvContatoNome.setText(contato.getRazao() + " / " + contato.getNome() + " / " + contato.getTelefone() + celular);
+        tvContatoNome.setText(contato.getRazao() + " / " + contato.getNome() + telefone + celular);
         return view;
     }
 

@@ -102,10 +102,10 @@ public class CadContatoActivity extends Activity implements DialogInterface.OnCl
                     etRazaoSocial.setError("Campo Razão social é obrigatório!", null);
                 }
 
-                if(telefone == null || telefone.equals("")){
+                /*if(telefone == null || telefone.equals("")){
                     valida = false;
                     etTelefone.setError("Campo Telefone é obrigatório!");
-                }
+                }*/
 
                 if(valida){
                     contato = new Contato();
